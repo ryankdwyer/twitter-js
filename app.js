@@ -1,11 +1,15 @@
 var express = require('express');
-var swig = require('swig');
-swig.setDefaults({cache: false});
 var app = express();
+var swig = require('swig');
+var routes = require('./routes');
+var tweetBank = require('./tweetBank.js');
 
+swig.setDefaults({cache: false});
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
+
+app.use('/', routes);
 
 app.listen(3000, function(){
 	console.log('Listening on port 3000');
@@ -16,21 +20,13 @@ app.use(function(request, response, next){
 	next();
 });
 
-app.get('/', function(request, response){
-	response.render('index', data);
+app.get("/*", function(request, response, next){
+	response.sendFile(__dirname + '/public' + request.path, {}, function(err) {
+		if (err) {
+			console.log(err);
+			next();
+		} else {
+			console.log('Sent: ' + __dirname + '/public' + request.path);
+		}
+	});
 });
-
-app.post('/', function(request, response){
-	response.send();
-});
-
-var data = {
-    title: 'An Example',
-    people: [{
-        name: 'Gandalf',
-    }, {
-        name: 'Frodo'
-    }, {
-        name: 'Hermione'
-    }]
-};
