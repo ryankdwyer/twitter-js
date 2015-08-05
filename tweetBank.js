@@ -2,8 +2,8 @@ var _ = require('underscore');
 
 var data = [];
 
-var add = function (name, text) {
-  data.push({ name: name, text: text });
+var add = function (id, name, text) {
+  data.push({ id: id, name: name, text: text });
 };
 
 var list = function () {
@@ -21,8 +21,8 @@ var randArrayEl = function(arr) {
 };
 
 var getFakeName = function() {
-  var fakeFirsts = ['Nimit', 'Dave', 'Will', 'Charlotte', 'Jacob','Ethan','Sophia','Emma','Madison'];
-  var fakeLasts = ["Alley", 'Stacky', 'Fullstackerson', 'Nerd', 'Ashby', 'Gatsby', 'Hazelnut', 'Cookie', 'Tilde', 'Dash'];
+  var fakeFirsts = ['Nimit', 'Dave', 'Will'];
+  var fakeLasts = ["Alley"];
   return randArrayEl(fakeFirsts) + " " + randArrayEl(fakeLasts);
 };
 
@@ -32,5 +32,5 @@ var getFakeTweet = function() {
 };
 
 for(var i=0; i<10; i++) {
-  module.exports.add( getFakeName(), getFakeTweet() );
+  module.exports.add( i, getFakeName(), getFakeTweet() );
 }
