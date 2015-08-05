@@ -19,6 +19,7 @@
   "homepage": "https://github.com/ryankdwyer/twitter-js#readme",
   "dependencies": {
     "express": "^4.13.3",
-    "nodemon": ""
+    "nodemon": "",
+    "swig": "^1.4.2"
   }
 }
